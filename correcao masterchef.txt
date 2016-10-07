@@ -1,0 +1,33 @@
+Modelo do DW
+1.Dimensão data totalmente fora de padrão. TEM que ter mais campos.
+Como eu disse em sala de aula, era para terem usado a tabela que
+disponibilizei na resposta ao exercício que fizemos.                     --  RESOLVERRRRRRRRR
+
+2.Não tem sentido aparecer o idTweet na tabela de data.  - RESOLVIDO
+
+3.Na dimensão local, por que não tem o país? Esse dado é importante. -- RESOLVIDO
+
+4.Se tem a dimensão participante, deveria haver na tabela fato,medidas de rejeição e aceitação (quantidade e percentual). - RESOLVIDO
+
+Matriz do DW Bus
+OK
+
+
+Modelo do BD Operacional
+
+1.Tinha que ter uma tabela com o local. Inclusive, no DW a dimensão local tem campos que não se acham na base operacional.
+
+2. Retweet e resposta não estão modelados corretamente, tinham que estar em tabelas.
+
+
+BD Operacional Populado
+1. a tabela hashtag só tem hashs positivas, assim a análise de sentimento
+não funciona.
+
+2. Achei a análise de sentimento esquisita. Por exemplo, um tweet com
+texto apenas "#MasterChefBR" foi considerado positivo, quando deveria
+ser neutro. 
+
+
+Pro DW utilizar Retweet como alcance e Favorito como Aceitação
+Utilizar Localização do usuário
