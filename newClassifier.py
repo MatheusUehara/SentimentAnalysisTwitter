@@ -100,39 +100,53 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 		tweetCriteria.until = until
 		tweetCriteria.querySearch = querysearch
 		tweetCriteria.maxTweets = 300000
-		#arqname = arquivo+".csv"
 
-		#outputFile = codecs.open( arqname, "w+", "utf-8")
-		#outputFile.write('texto;data;username;local;sentimento;retweet;favorito;episodio')
 		print 'Searching...\n'
 		
 		def receiveBuffer(tweets):
+			print "entrou"
 			for t in tweets:
 				global c
+				global conn
+
 				texto = t.text
 				texto = texto.replace('"','\\"')
 				texto = texto.replace ('/','')
+
 				tweet_sentiment = classifica(texto)
-				query = 'INSERT INTO tweet(texto,data,usuario,local,sentimento_idTipo,retweet,favorito,episodio)VALUES ("%s","%s","%s","%s",%d,%d,%d,%d)' %(texto, t.date.strftime("%Y-%m-%d %H:%M"),t.username,t.geo ,tweet_sentiment, t.retweets , t.favorites,episodio)
-				#print query
+
+				idLocal = 1
+
+				local = t.geo
+				local = local.split(',')
+				print local
+
+				if len(local) == 2:
+					#brasil=['AC','Acre','AL','Alagoas','AP','Amapá','AM','Amazonas','BA','Bahia','CE','Ceará','DF','Distritoederal','ES','EspíritoSanto','GO','Goiás','MA','Maranhão','MT','MatoGrosso','MS','MatoGrossodoSul','MG','MinasGerais','PA','Pará','PB','Paraíba','PR','Paraná','PE','Pernambuco','PI','Piauí','RJ','RiodeJaneiro','RN','RioGrandedoNorte','RS','RioGrandedoSul','RO','Rondônia','RR','Roraima','SC','SantaCatarina','SP','SãoPaulo','SE','Sergipe','TO','Tocantins']
+					queryLocal = 'INSERT INTO local(cidade,pais) VALUES ("%s","%s")' %(local[0], local[1])
+					print queryLocal
+					try:
+						c.execute(queryLocal)
+						idLocal= c.lastrowid
+						print idLocal
+						conn.commit()
+					except:
+						idLocal = 1			
+				query = 'INSERT INTO tweet(texto,data,usuario,idLocal,sentimento_idTipo,retweet,favorito,episodio)VALUES ("%s","%s","%s",%d,%d,%d,%d,%d)' %(texto, t.date.strftime("%Y-%m-%d %H:%M"),t.username,idLocal ,tweet_sentiment, t.retweets , t.favorites,episodio)
+				print query
 				try:
 					c.execute(query)
 					conn.commit()
 					print "inserido"
 				except:
 					pass
-				#outputFile.write(('\n%s;%s;%s;%s;%d;%d;"%d";%d' % (t.text,t.date.strftime("%Y-%m-%d %H:%M"),t.username,t.geo,tweet_sentiment, t.retweets, t.favorites, episodio)))			
-										
-
-			#outputFile.flush();
 			print 'More %d saved on file...\n' % len(tweets)
 		got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
-
 	except e:
 		print e
 	finally:
 		#outputFile.close()
-		print 'Done. Output file generated'+ arquivo
+		print 'Done. '+ arquivo
 
 
 getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)

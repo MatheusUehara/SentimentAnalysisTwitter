@@ -1,13 +1,13 @@
 Modelo do DW
-1.Dimens„o data totalmente fora de padr„o. TEM que ter mais campos.
+1.Dimens√£o data totalmente fora de padr√£o. TEM que ter mais campos.
 Como eu disse em sala de aula, era para terem usado a tabela que
-disponibilizei na resposta ao exercÌcio que fizemos.                     --  RESOLVERRRRRRRRR
+disponibilizei na resposta ao exerc√≠cio que fizemos.                     --  RESOLVIDO
 
-2.N„o tem sentido aparecer o idTweet na tabela de data.  - RESOLVIDO
+2.N√£o tem sentido aparecer o idTweet na tabela de data.  - RESOLVIDO
 
-3.Na dimens„o local, por que n„o tem o paÌs? Esse dado È importante. -- RESOLVIDO
+3.Na dimens√£o local, por que n√£o tem o pa√≠s? Esse dado √© importante. -- RESOLVIDO
 
-4.Se tem a dimens„o participante, deveria haver na tabela fato,medidas de rejeiÁ„o e aceitaÁ„o (quantidade e percentual). - RESOLVIDO
+4.Se tem a dimens√£o participante, deveria haver na tabela fato,medidas de rejei√ß√£o e aceita√ß√£o (quantidade e percentual). - RESOLVIDO
 
 Matriz do DW Bus
 OK
@@ -15,19 +15,17 @@ OK
 
 Modelo do BD Operacional
 
-1.Tinha que ter uma tabela com o local. Inclusive, no DW a dimens„o local tem campos que n„o se acham na base operacional.
+1.Tinha que ter uma tabela com o local. Inclusive, no DW a dimens√£o local tem campos que n√£o se acham na base operacional. - RESOLVIDO
 
-2. Retweet e resposta n„o est„o modelados corretamente, tinham que estar em tabelas.
+2. Retweet e resposta n√£o est√£o modelados corretamente, tinham que estar em tabelas. - RESOLVIDO
 
-
+ 
 BD Operacional Populado
-1. a tabela hashtag sÛ tem hashs positivas, assim a an·lise de sentimento
-n„o funciona.
+1. a tabela hashtag s√≥ tem hashs positivas, assim a an√°lise de sentimento n√£o funciona. - RESOLVENDOO
 
-2. Achei a an·lise de sentimento esquisita. Por exemplo, um tweet com
-texto apenas "#MasterChefBR" foi considerado positivo, quando deveria
-ser neutro. 
+2. Achei a an√°lise de sentimento esquisita. Por exemplo, um tweet com
+texto apenas "#MasterChefBR" foi considerado positivo, quando deveria ser neutro. - RESOLVENDO
 
 
-Pro DW utilizar Retweet como alcance e Favorito como AceitaÁ„o
-Utilizar LocalizaÁ„o do usu·rio
+Pro DW utilizar Retweet como alcance e Favorito como Aceita√ß√£o
+Utilizar Localiza√ß√£o do usu√°rio
