@@ -65,9 +65,10 @@ stemmer = nltk.stem.RSLPStemmer()
 global palavras_caracteristicas
 frases = []
 for (palavras, sentimento) in base:
-    print palavras
+    #print palavras
     filtrado = [str(stemmer.stem(e)) for  e in palavras.split() if e not in stopwords]
     frases.append((filtrado, sentimento))
+    #print (filtrado, sentimento)
 
 palavras = busca_palavras_frases(frases)
 frequencia = busca_frequencia_palavras(palavras)
@@ -85,7 +86,9 @@ def classifica(tweetCont):
 			tweet_stemming.append(str(stemmer.stem(filtrado[0])))
 		except:
 			return 3
+	#print extrator_caracteristicas(tweet_stemming)
 	sentimento = classificador.classify(extrator_caracteristicas(tweet_stemming))
+
 	if sentimento == "neutro":
 		return 1
 	elif sentimento == "positivo":
@@ -119,7 +122,9 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 
 				local = t.geo
 				local = local.split(',')
-				print local
+
+				#print tweet_sentiment
+
 
 				if len(local) == 2:
 					#brasil=['AC','Acre','AL','Alagoas','AP','Amapá','AM','Amazonas','BA','Bahia','CE','Ceará','DF','Distritoederal','ES','EspíritoSanto','GO','Goiás','MA','Maranhão','MT','MatoGrosso','MS','MatoGrossodoSul','MG','MinasGerais','PA','Pará','PB','Paraíba','PR','Paraná','PE','Pernambuco','PI','Piauí','RJ','RiodeJaneiro','RN','RioGrandedoNorte','RS','RioGrandedoSul','RO','Rondônia','RR','Roraima','SC','SantaCatarina','SP','SãoPaulo','SE','Sergipe','TO','Tocantins']
@@ -131,7 +136,7 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 						print idLocal
 						conn.commit()
 					except:
-						idLocal = 1			
+						idLocal = 1		
 				query = 'INSERT INTO tweet(texto,data,usuario,idLocal,sentimento_idTipo,retweet,favorito,episodio)VALUES ("%s","%s","%s",%d,%d,%d,%d,%d)' %(texto, t.date.strftime("%Y-%m-%d %H:%M"),t.username,idLocal ,tweet_sentiment, t.retweets , t.favorites,episodio)
 				print query
 				try:
@@ -140,6 +145,7 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 					print "inserido"
 				except:
 					pass
+				
 			print 'More %d saved on file...\n' % len(tweets)
 		got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
 	except e:

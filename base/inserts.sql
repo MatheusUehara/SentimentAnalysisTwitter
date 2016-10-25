@@ -33,7 +33,11 @@ INSERT INTO hashtag (hash) VALUES ('#FicaLeonardo'),('#FicaBruna'),
 ('#VoltaHellen'),('#VoltaRodrigo'),('#equipeVermelha'),('#equipeAzul'),
 ('#equipeAmarela'),('#VemNiMim'),('#SentaNaGraxa'),('#PodeVirQuente'),
 ('#JacquinSincero'),('#CaixaMisteriosa'),('#PartiuGeladeira'),
-('#DivinoMaravilhoso'),('#GanhaLeonardo'),('#GanhaBruna'),('#MasterChefBR');
+('#DivinoMaravilhoso'),('#GanhaLeonardo'),('#GanhaBruna'),('#MasterChefBR'),
+('#ForaLeonardo'),('#ForaBruna'),('#ForaRaquel'),('#ForaLuriana'),('#ForaFabio'),('#ForaLee'),
+('#ForaPaula'),('#ForaAluisio'),('#ForaPedro'),('#ForaFernando'),('#ForaThaiana'),
+('#ForaGleice'),('#ForaVanessa'),('#ForaRodrigo'),('#ForaLivia'),('#ForaGuilherme'),
+('#ForaNuno'),('#ForaGabriella'),('#ForaTenente'),('#ForaVictor'),('#ForaHellen');
 
 -- ---------------------------------
 -- query de inserção dos sentimentos
@@ -49,7 +53,8 @@ INSERT INTO participante_has_hashtag (participante_idparticipante,hashtag_idHash
 VALUES (1,1),(1,41),(2,2),(2,42),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),
 (10,27),(11,11),(12,12),(12,22),(13,13),(14,14),(14,30),(15,15),(15,23),(16,16),
 (17,17),(17,25),(18,18),(18,26),(19,19),(19,24),(20,20),(20,28),(21,21),(21,29),
-(22,22),(22,37);
+(22,37),(1,44),(2,45),(3,46),(4,47),(5,48),(6,49),(7,50),(8,51),(9,52),(10,53),
+(11,54),(12,55),(13,56),(14,57),(15,58),(16,59),(17,60),(18,61),(19,62),(20,63);
 
 
 
