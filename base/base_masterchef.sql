@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `base_masterchef`.`local` (
   `estado` VARCHAR(100) NULL,
   `pais` VARCHAR(100) NULL,
   PRIMARY KEY (`idLocal`))
-ENGINE = InnoDB;
-
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `base_masterchef`.`tweet`

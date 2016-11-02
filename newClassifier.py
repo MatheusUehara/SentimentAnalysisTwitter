@@ -96,18 +96,50 @@ def classifica(tweetCont):
 	else:
 		return 3
 
+def verificaInsereLocal(cidade,pais):
+	global conn
+	global c
+	try:
+		queryExisteLocal = 'SELECT * FROM local WHERE cidade = "%s" and pais = "%s" ' %(cidade,pais)
+		c.execute(queryExisteLocal)
+		row = c.fetchone()
+		print row[0]
+		if row[0]:
+			print "Local ja cadastrado %i" %(row[0])
+			return row[0]
+		else:
+			print "Nao existe esse local"
+			return 1
+	except Exception as e:
+		print e
+		return insereLocal(cidade,pais)
+
+def insereLocal(cidade,pais):
+	global conn
+	global c
+	try:
+		queryLocal = 'INSERT INTO local(cidade,pais) VALUES ("%s","%s")' %(cidade,pais)
+		c.execute(queryLocal)
+		conn.commit()
+		valor = c.lastrowid
+		print "Foi adicionado um novo local %i" %(valor)
+		return valor
+	except Exception as e:
+		print e
+		return 1
+
 def getTweet(querysearch,since,until,arquivo,episodio):
 	try:
 		tweetCriteria = got.manager.TweetCriteria()
 		tweetCriteria.since = since
 		tweetCriteria.until = until
 		tweetCriteria.querySearch = querysearch
-		tweetCriteria.maxTweets = 300000
+		tweetCriteria.maxTweets = 1000000
 
 		print 'Searching...\n'
 		
 		def receiveBuffer(tweets):
-			print "entrou"
+			print "Iniciou"
 			for t in tweets:
 				global c
 				global conn
@@ -123,51 +155,40 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 				local = t.geo
 				local = local.split(',')
 
-				#print tweet_sentiment
-
-
 				if len(local) == 2:
-					#brasil=['AC','Acre','AL','Alagoas','AP','Amapá','AM','Amazonas','BA','Bahia','CE','Ceará','DF','Distritoederal','ES','EspíritoSanto','GO','Goiás','MA','Maranhão','MT','MatoGrosso','MS','MatoGrossodoSul','MG','MinasGerais','PA','Pará','PB','Paraíba','PR','Paraná','PE','Pernambuco','PI','Piauí','RJ','RiodeJaneiro','RN','RioGrandedoNorte','RS','RioGrandedoSul','RO','Rondônia','RR','Roraima','SC','SantaCatarina','SP','SãoPaulo','SE','Sergipe','TO','Tocantins']
-					queryLocal = 'INSERT INTO local(cidade,pais) VALUES ("%s","%s")' %(local[0], local[1])
-					print queryLocal
-					try:
-						c.execute(queryLocal)
-						idLocal= c.lastrowid
-						print idLocal
-						conn.commit()
-					except:
-						idLocal = 1		
-				query = 'INSERT INTO tweet(texto,data,usuario,idLocal,sentimento_idTipo,retweet,favorito,episodio)VALUES ("%s","%s","%s",%d,%d,%d,%d,%d)' %(texto, t.date.strftime("%Y-%m-%d %H:%M"),t.username,idLocal ,tweet_sentiment, t.retweets , t.favorites,episodio)
-				print query
+					idLocal = verificaInsereLocal(local[0], local[1])
+				else:
+					idLocal = 1
+				query = 'INSERT INTO tweet(texto,data,usuario,idLocal,sentimento_idTipo,retweet,favorito,episodio)VALUES ("%s","%s","%s",%i,%i,%i,%i,%i)' %(texto, t.date.strftime("%Y-%m-%d %H:%M"),t.username,idLocal ,tweet_sentiment, t.retweets , t.favorites,episodio)
 				try:
 					c.execute(query)
 					conn.commit()
-					print "inserido"
+					print "Inserido"
 				except:
 					pass
 				
-			print 'More %d saved on file...\n' % len(tweets)
+			print 'Mais %d registros foram insereidos a base de dados...\n' % len(tweets)
 		got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
 	except e:
 		print e
 	finally:
-		#outputFile.close()
-		print 'Done. '+ arquivo
+		print 'Fim. '+ arquivo
 
 
-getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)
+#getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)
+#getTweet('#masterchefBR','2016-03-22','2016-03-23','MC3-22mar',2)
+#getTweet('#masterchefBR','2016-03-29','2016-03-30','MC3-29mar',3)
 
-getTweet('#masterchefBR','2016-03-22','2016-03-23','MC3-22mar',2)
-getTweet('#masterchefBR','2016-03-29','2016-03-30','MC3-29mar',3)
+#getTweet('#masterchefBR','2016-04-05','2016-04-07','MC3-05abr',4)
+#getTweet('#masterchefBR','2016-04-12','2016-04-14','MC3-12abr',5)
 
-getTweet('#masterchefBR','2016-04-05','2016-04-07','MC3-05abr',4)
-getTweet('#masterchefBR','2016-04-12','2016-04-14','MC3-12abr',5)
-getTweet('#masterchefBR','2016-04-19','2016-04-21','MC3-19abr',6)
-getTweet('#masterchefBR','2016-04-26','2016-04-28','MC3-26abr',7)
 
-getTweet('#masterchefBR','2016-05-03','2016-05-05','MC3-03mai',8)
-getTweet('#masterchefBR','2016-05-10','2016-05-12','MC3-10mai',9)
-getTweet('#masterchefBR','2016-05-17','2016-05-19','MC3-17mai',10)
+#getTweet('#masterchefBR','2016-04-19','2016-04-21','MC3-19abr',6)
+#getTweet('#masterchefBR','2016-04-26','2016-04-28','MC3-26abr',7)
+
+#getTweet('#masterchefBR','2016-05-03','2016-05-05','MC3-03mai',8)
+#getTweet('#masterchefBR','2016-05-10','2016-05-12','MC3-10mai',9)
+#getTweet('#masterchefBR','2016-05-17','2016-05-19','MC3-17mai',10)
 getTweet('#masterchefBR','2016-05-24','2016-05-26','MC3-24mai',11)
 getTweet('#masterchefBR','2016-05-31','2016-06-02','MC3-31mai',12)
 
