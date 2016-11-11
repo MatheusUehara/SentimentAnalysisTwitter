@@ -118,7 +118,7 @@ def insereLocal(cidade,pais):
 	global conn
 	global c
 	try:
-		queryLocal = 'INSERT INTO local(cidade,pais) VALUES ("%s","%s")' %(cidade,pais)
+		queryLocal = 'INSERT INTO local(cidade,estado,pais) VALUES ("%s","sem estado","%s")' %(cidade,pais)
 		c.execute(queryLocal)
 		conn.commit()
 		valor = c.lastrowid
@@ -174,35 +174,27 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 	finally:
 		print 'Fim. '+ arquivo
 
-
 #getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)
 #getTweet('#masterchefBR','2016-03-22','2016-03-23','MC3-22mar',2)
 #getTweet('#masterchefBR','2016-03-29','2016-03-30','MC3-29mar',3)
-
 #getTweet('#masterchefBR','2016-04-05','2016-04-07','MC3-05abr',4)
 #getTweet('#masterchefBR','2016-04-12','2016-04-14','MC3-12abr',5)
-
-
 #getTweet('#masterchefBR','2016-04-19','2016-04-21','MC3-19abr',6)
-#getTweet('#masterchefBR','2016-04-26','2016-04-28','MC3-26abr',7)
-
-#getTweet('#masterchefBR','2016-05-03','2016-05-05','MC3-03mai',8)
-#getTweet('#masterchefBR','2016-05-10','2016-05-12','MC3-10mai',9)
-#getTweet('#masterchefBR','2016-05-17','2016-05-19','MC3-17mai',10)
+getTweet('#masterchefBR','2016-04-26','2016-04-28','MC3-26abr',7)
+getTweet('#masterchefBR','2016-05-03','2016-05-05','MC3-03mai',8)
+getTweet('#masterchefBR','2016-05-10','2016-05-12','MC3-10mai',9)
+getTweet('#masterchefBR','2016-05-17','2016-05-19','MC3-17mai',10)
 getTweet('#masterchefBR','2016-05-24','2016-05-26','MC3-24mai',11)
 getTweet('#masterchefBR','2016-05-31','2016-06-02','MC3-31mai',12)
-
 getTweet('#masterchefBR','2016-06-07','2016-06-09','MC3-07jun',13)
 getTweet('#masterchefBR','2016-06-14','2016-06-16','MC3-14jun',14)
 getTweet('#masterchefBR','2016-06-21','2016-06-23','MC3-21jun',15)
 getTweet('#masterchefBR','2016-06-28','2016-06-20','MC3-28jun',16)
-
 getTweet('#masterchefBR','2016-07-04','2016-07-05','MC3-05jul',17)
 getTweet('#masterchefBR','2016-07-06','2016-07-07','MC3-06jul',18)
 getTweet('#masterchefBR','2016-07-12','2016-07-14','MC3-12jul',19)
 getTweet('#masterchefBR','2016-07-19','2016-07-21','MC3-19jul',20)
 getTweet('#masterchefBR','2016-07-26','2016-07-28','MC3-26jul',21)
-
 getTweet('#masterchefBR','2016-08-02','2016-08-04','MC3-02ago',22)
 getTweet('#masterchefBR','2016-08-09','2016-08-11','MC3-09ago',23)
 getTweet('#masterchefBR','2016-08-16','2016-08-18','MC3-16ago',24)

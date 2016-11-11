@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pymysql
 
-hashtags= {"#FicaLeonardo":1,"#FicaBruna":2,"#FicaRaquel":3,"#FicaLuriana":4,"#FicaFabio":5,"#FicaLee":6,"#FicaPaula":7,"#FicaAluisio":8,"#FicaPedro":9,"#FicaFernando":10,"#FicaThaiana":11,"#FicaGleice":12,"#FicaVanessa":13,"#FicaRodrigo":14,"#FicaLivia":15,"#FicaGuilherme":16,"#FicaNuno":17,"#FicaGabriella":18,"#FicaTenente":19,"#FicaVictor":20,"#FicaHellen":21,"#VoltaGleice":22,"#VoltaLivia":23,"#VoltaTenente":24,"#VoltaNuno":25,"#VoltaGabriella":26,"#VoltaFernando":27,"#VoltaVictor":28,"#VoltaHellen":29,"#VoltaRodrigo":30,"#equipeVermelha":31,"#equipeAzul":32,"#equipeAmarela":33,"#VemNiMim":34,"#SentaNaGraxa":35,"#PodeVirQuente":36,"#JacquinSincero":37,"#CaixaMisteriosa":38,"#PartiuGeladeira":39,"#DivinoMaravilhoso":40,"#GanhaLeonardo":41,"#GanhaBruna":42,'#MasterChefBR':43,'#ForaLeonardo':44,'#ForaBruna':45,'#ForaRaquel':46,'#ForaLuriana':47,'#ForaFabio':48,'#ForaLee':49,'#ForaPaula':50,'#ForaAluisio':51,'#ForaPedro':52,'#ForaFernando':53,'#ForaThaiana':54,'#ForaGleice':55,'#ForaVanessa':56,'#ForaRodrigo':57,'#ForaLivia':58,'#ForaGuilherme':59,'#ForaNuno':60,'#ForaGabriella':61,'#ForaTenente':62,'#ForaVictor':63,'#ForaHellen':64;
+hashtags= {"#FicaLeonardo":1,"#FicaBruna":2,"#FicaRaquel":3,"#FicaLuriana":4,"#FicaFabio":5,"#FicaLee":6,"#FicaPaula":7,"#FicaAluisio":8,"#FicaPedro":9,"#FicaFernando":10,"#FicaThaiana":11,"#FicaGleice":12,"#FicaVanessa":13,"#FicaRodrigo":14,"#FicaLivia":15,"#FicaGuilherme":16,"#FicaNuno":17,"#FicaGabriella":18,"#FicaTenente":19,"#FicaVictor":20,"#FicaHellen":21,"#VoltaGleice":22,"#VoltaLivia":23,"#VoltaTenente":24,"#VoltaNuno":25,"#VoltaGabriella":26,"#VoltaFernando":27,"#VoltaVictor":28,"#VoltaHellen":29,"#VoltaRodrigo":30,"#equipeVermelha":31,"#equipeAzul":32,"#equipeAmarela":33,"#VemNiMim":34,"#SentaNaGraxa":35,"#PodeVirQuente":36,"#JacquinSincero":37,"#CaixaMisteriosa":38,"#PartiuGeladeira":39,"#DivinoMaravilhoso":40,"#GanhaLeonardo":41,"#GanhaBruna":42,'#MasterChefBR':43,'#ForaLeonardo':44,'#ForaBruna':45,'#ForaRaquel':46,'#ForaLuriana':47,'#ForaFabio':48,'#ForaLee':49,'#ForaPaula':50,'#ForaAluisio':51,'#ForaPedro':52,'#ForaFernando':53,'#ForaThaiana':54,'#ForaGleice':55,'#ForaVanessa':56,'#ForaRodrigo':57,'#ForaLivia':58,'#ForaGuilherme':59,'#ForaNuno':60,'#ForaGabriella':61,'#ForaTenente':62,'#ForaVictor':63,'#ForaHellen':64}
 
 leonardo = ["Leonardo Young","MC3_Leonardo","Leo","Leonardo","#FicaLeonardo","#GanhaLeonardo","#ForaLeonardo"]
 bruna = ["Bruna Chaves","MC3_Bruna","Bruna","bruninha","#FicaBruna","#GanhaBruna","#ForaBruna"]
@@ -51,7 +51,8 @@ def insertRelacaoParticipante(idTweet, idParticipante):
 		c.execute(sqlInsertParticipante)
 		conn.commit()
 		sucessParticipante += 1
-	except:
+	except Exception as e:
+		print e
 		relacaoParticipanteFails += 1
 		pass
 
@@ -63,10 +64,12 @@ def insertRelacaoHashtag(idTweet,idHashtag):
 	global relacaoHashtagFails
 	try:
 		sqlInsertHashtag  = 'INSERT into tweet_has_hashtag (tweet_idTweet,hashtag_idHashtag) VALUES (%d,%d);' %(idTweet,idHashtag)
+		print sqlInsertHashtag
 		c.execute(sqlInsertHashtag)
 		conn.commit()
 		sucessHashtag += 1
-	except:
+	except Exception as e:
+		print e
 		relacaoHashtagFails += 1
 		pass
 		
@@ -76,7 +79,7 @@ def percorreArray(array,tweet,tweet_id,id_participante):
 			insertRelacaoParticipante(tweet_id,id_participante)
 			#print  tweet
 
-sql1 = "SELECT idTweet, texto FROM tweet"
+sql1 = "SELECT idTweet, texto FROM tweet where episodio = 1"
 c.execute(sql1)
 results = c.fetchall()
 
@@ -116,7 +119,7 @@ for tweet in results:
 		hashTAG = str(hashTAG)
 		if hashTAG in tweet_text:
 			#print tweet_text + "HASHTAG PRESENTE"
-			insertRelacaoHashtag(hashtags[hashTAG],tweet_id)
+			insertRelacaoHashtag(tweet_id,hashtags[hashTAG])
 
 totalParticipante = relacaoParticipanteFails + sucessParticipante
 totalHashtag = relacaoHashtagFails+sucessHashtag
