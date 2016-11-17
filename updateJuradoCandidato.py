@@ -79,7 +79,7 @@ def percorreArray(array,tweet,tweet_id,id_participante):
 			insertRelacaoParticipante(tweet_id,id_participante)
 			#print  tweet
 
-sql1 = "SELECT idTweet, texto FROM tweet where episodio = 1"
+sql1 = "SELECT idTweet, texto FROM tweet where episodio = 10"
 c.execute(sql1)
 results = c.fetchall()
 
@@ -125,3 +125,4 @@ totalParticipante = relacaoParticipanteFails + sucessParticipante
 totalHashtag = relacaoHashtagFails+sucessHashtag
 print "FALHAS DA INSERÇÂO DE RELACAO PARTICIPANTE TWEET %d de %d" %(relacaoParticipanteFails, totalParticipante)
 print "FALHAS DA INSERÇÂO DE RELACAO HASHTAG TWEET %d de %d" %(relacaoHashtagFails, totalHashtag)
+	

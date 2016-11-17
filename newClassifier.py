@@ -174,12 +174,12 @@ def getTweet(querysearch,since,until,arquivo,episodio):
 	finally:
 		print 'Fim. '+ arquivo
 
-#getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)
-#getTweet('#masterchefBR','2016-03-22','2016-03-23','MC3-22mar',2)
-#getTweet('#masterchefBR','2016-03-29','2016-03-30','MC3-29mar',3)
-#getTweet('#masterchefBR','2016-04-05','2016-04-07','MC3-05abr',4)
-#getTweet('#masterchefBR','2016-04-12','2016-04-14','MC3-12abr',5)
-#getTweet('#masterchefBR','2016-04-19','2016-04-21','MC3-19abr',6)
+getTweet('#masterchefBR','2016-03-15','2016-03-17','MC3-15mar',1)
+getTweet('#masterchefBR','2016-03-22','2016-03-23','MC3-22mar',2)
+getTweet('#masterchefBR','2016-03-29','2016-03-30','MC3-29mar',3)
+getTweet('#masterchefBR','2016-04-05','2016-04-07','MC3-05abr',4)
+getTweet('#masterchefBR','2016-04-12','2016-04-14','MC3-12abr',5)
+getTweet('#masterchefBR','2016-04-19','2016-04-21','MC3-19abr',6)
 getTweet('#masterchefBR','2016-04-26','2016-04-28','MC3-26abr',7)
 getTweet('#masterchefBR','2016-05-03','2016-05-05','MC3-03mai',8)
 getTweet('#masterchefBR','2016-05-10','2016-05-12','MC3-10mai',9)
